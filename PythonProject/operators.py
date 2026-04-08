@@ -26,7 +26,6 @@ print("Exponentiation of a ** b=",a**b)
 print("Modulus of a % b=",a%b)
 
 #Relational OR Comparison Operator
-
 # == and is both used for comparison
 #== (value comparison of two objects)
 print(a==b)
@@ -37,6 +36,8 @@ print(a is b)
 a=10
 b=a
 print(a is b)
+
+
 
 
 
