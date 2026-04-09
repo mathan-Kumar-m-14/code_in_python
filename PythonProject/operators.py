@@ -39,5 +39,7 @@ print(a is b)
 
 
 
+x=int(input())
+print("mathan",x,"kumar")
 
-
+print("enter a value" +input())
