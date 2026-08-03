@@ -1,45 +1,51 @@
-a=10
-b=11
-#Arithmetic Operator
-#addition
-print("Addition of a+b=",a+b)
+firstDayIncome=10000
+secondDayIncome=20000
 
-#subraction
-print("Subraction of a-b=",a-b)
+#arithmetic operator
+print(firstDayIncome + secondDayIncome)
 
-#divion(floating number)
-print("Division of a/b=",a/b)
+#multiplication operator
+print(secondDayIncome * 15)
 
-#division(floor number)
-print("Floor Division of a//b=",a//b)
+#substraction operator
+print(firstDayIncome - 1000)
 
-#Multiplication
-print("Multiplication of a x b=",a*b)
+#division operator
+percentage=3
 
-#exponentiation
-#now new object create for 2 and 10 ,then x and y reference the object
-a=2
-b=10
-print("Exponentiation of a ** b=",a**b)
+print(percentage/100) #0.03
 
-#modulus
-print("Modulus of a % b=",a%b)
+#floor division operator
+print(percentage//100) # floor value will return (integer)
 
-#Relational OR Comparison Operator
-# == and is both used for comparison
-#== (value comparison of two objects)
-print(a==b)
-
-#is (memory location comparison of two objects)
-print(a is b)
-
-a=10
-b=a
-print(a is b)
+#exponentiation operator
+print(percentage ** 3) #3*3*3=27
 
 
+#relational operator
+# ==, <, >, <=, >=, != (it return either true or false)
 
-x=int(input())
-print("mathan",x,"kumar")
+salary_1=30000
+salary_2=30001
 
-print("enter a value" +input())
+print (salary_1 > salary_2)
+
+#logical operator
+# and , or , not
+
+#true and false =false
+#true or false =true
+# not true =false
+
+#bitwise operator
+# &, || , << , >> , ~ , ^
+
+#assignment operator
+name="mathan" # assign the right side of the values to the operand
+print (name)
+
+#ternary operator
+# like if else condition
+company_revenue=100000
+
+print("This year you will get hike" if company_revenue >500000 else "No hike" )
