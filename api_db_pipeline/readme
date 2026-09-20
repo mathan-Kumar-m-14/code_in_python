@@ -1,0 +1,11 @@
+1. Need to search for an free public API
+2. For this project i am going to use https://openweathermap.org/api
+       --weather api to get the GeoCode using the city name
+3.Before starting the project pre install below:
+       ->requests =used to send HTTP requests to APIs and receive their responses.
+       ->psycopg  =used to connect to and interact with a PostgreSQL database.
+4. in Extract i have called two different public api
+        -> first api to get the geocode of the city (open meteo)
+        ->second api to get the details of the city weather using the geocode(open weather map api)
+5.in Transform
+

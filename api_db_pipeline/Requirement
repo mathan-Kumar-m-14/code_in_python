@@ -1,0 +1,9 @@
+"We want a system that takes a city name as input, fetches the current weather details for that city,
+and stores it in our database — so we can track weather history over time for [reporting/analysis]."
+
+1. Accept a city name, not coordinates	----    Need a geocoding step — city name → latitude/longitude
+2. Get current weather	                ----    Call a weather API using those coordinates
+3. Store it for later use               ----	Load into PostgreSQL, not just print to console
+4. Track history over time              ----	Each run should INSERT a new row with a timestamp, not overwrite the same record
+Should work reliably, unattended	    ----    Handle API failures, timeouts, and bad city names gracefully (no crashes)
+Should run automatically	            ----    Schedule via cron rather than running manually each time
