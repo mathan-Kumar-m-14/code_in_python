@@ -1,11 +1,73 @@
-1. Need to search for an free public API
-2. For this project i am going to use https://openweathermap.org/api
-       --weather api to get the GeoCode using the city name
-3.Before starting the project pre install below:
-       ->requests =used to send HTTP requests to APIs and receive their responses.
-       ->psycopg  =used to connect to and interact with a PostgreSQL database.
-4. in Extract i have called two different public api
-        -> first api to get the geocode of the city (open meteo)
-        ->second api to get the details of the city weather using the geocode(open weather map api)
-5.in Transform
+Weather Data ETL Pipeline:
+    A small ETL pipeline that fetches current weather data for a given city and loads it into PostgreSQL.
 
+Requirement:
+    Given a city name, fetch its current weather details and store them in a database for historical tracking
+    -so weather data can be queried and analyzed over time rather than just viewed once.
+
+APIs Used:
+
+    Two free public APIs are used, since one alone doesn't cover both steps needed:
+
+    1. "OpenWeatherMap Geocoding API" — converts a city name into latitude/longitude coordinates.
+         https://openweathermap.org/api/geocoding-api
+    2. "Open-Meteo Weather API" — takes the latitude/longitude and returns current weather details (no signup/API key required).
+        https://open-meteo.com/
+
+Prerequisites:
+
+Install the required packages before running:
+
+    'requests' — used to send HTTP requests to APIs and receive their responses.
+    'psycopg' — used to connect to and interact with the PostgreSQL database.
+
+in terminal:
+    pip install requests psycopg
+
+
+Pipeline Flow:
+
+1. Extract
+    - Call the OpenWeatherMap Geocoding API with the city name to get its latitude/longitude.
+    - Use that latitude/longitude to call the Open-Meteo API and retrieve current weather details.
+
+2. Transform
+    - Extract the essential fields from the weather API response (temperature, humidity, wind speed, timezone, time).
+    - Apply business logic to derive `is_hot` and `is_rainy` flags based on temperature/humidity thresholds.
+    - Bundle the cleaned fields into a single dictionary, ready to load into the database.
+
+3. Load
+    - Insert the transformed record into the PostgreSQL `weatherreport` table.
+
+Error Handling:
+
+    - API calls are wrapped in try/except blocks with timeouts, handling network errors, and bad HTTP responses without crashing.
+    - Database inserts are wrapped in try/except with rollback on failure.
+
+Database Schema:
+
+CREATE TABLE weatherreport (
+    id serial PRIMARY KEY,
+    city_name varchar NOT NULL,
+    received_time timestamp with time zone NOT NULL,
+    timezone varchar NOT NULL,
+    temperature numeric NOT NULL,
+    humidity numeric NOT NULL,
+    wind_speed numeric NOT NULL,
+    is_hot boolean DEFAULT false,
+    is_rainy boolean DEFAULT false,
+    createddate timestamp with time zone DEFAULT NOW()
+);
+
+CREATE INDEX idx_city ON weatherreport(city_name);
+
+
+How to Run:
+
+python main.py
+
+
+Possible Future Improvements:
+
+    - Schedule the script using cron for periodic data collection.
+    - Add logging to a file instead of print statements.
